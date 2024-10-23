@@ -12,7 +12,6 @@ import (
 	ocpappsv1 "github.com/openshift/api/apps/v1"
 	appsv1 "k8s.io/api/apps/v1"
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1beta1 "k8s.io/api/batch/v1beta1"
 	coordinationv1 "k8s.io/api/coordination/v1"
 	corev1 "k8s.io/api/core/v1"
 	networkingv1 "k8s.io/api/networking/v1"
@@ -30,7 +29,6 @@ func NewScheme() *runtime.Scheme {
 	_ = corev1.AddToScheme(scheme)
 	_ = appsv1.AddToScheme(scheme)
 	_ = batchv1.AddToScheme(scheme)
-	_ = batchv1beta1.AddToScheme(scheme)
 	_ = rbacv1.AddToScheme(scheme)
 	_ = networkingv1.AddToScheme(scheme)
 	_ = v1alpha1.AddToScheme(scheme)
@@ -461,7 +459,7 @@ func (c ConfigData) PolicyBundleOciUser() string {
 func (c ConfigData) PolicyBundleOciPassword() string {
 	return c[KeyPoliciesBundleOciPassword]
 }
-func (c ConfigData) GeTrivyServerURL() string {
+func (c ConfigData) GetTrivyServerURL() string {
 	return c[KeyTrivyServerURL]
 }
 func (c ConfigData) GetRequiredData(key string) (string, error) {

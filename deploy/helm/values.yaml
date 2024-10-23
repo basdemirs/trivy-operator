@@ -73,7 +73,8 @@ operator:
 
   # -- scanJobsRetryDelay the duration to wait before retrying a failed scan job
   scanJobsRetryDelay: 30s
-
+  # -- scanJobsDelayRequeue the duration to wait before requeueing a scan job that was not processed (e.g. because of a concurrency limit)
+  scanJobsDelayRequeue: 60s
   # -- the flag to enable vulnerability scanner
   vulnerabilityScannerEnabled: true
   # -- the flag to enable sbom generation, required for enabling ClusterVulnerabilityReports
@@ -340,7 +341,7 @@ trivy:
     # -- repository of the Trivy image
     repository: aquasecurity/trivy
     # -- tag version of the Trivy image
-    tag: 0.53.0
+    tag: 0.54.1
     # -- imagePullSecret is the secret name to be used when pulling trivy image from private registries example : reg-secret
     # It is the user responsibility to create the secret for the private registry in `trivy-operator` namespace
     imagePullSecret: ~
@@ -378,7 +379,7 @@ trivy:
   priorityClassName: ""
 
   # -- additionalVulnerabilityReportFields is a comma separated list of additional fields which
-  # can be added to the VulnerabilityReport. Supported parameters: Description, Links, CVSS, Target, Class, PackagePath and PackageType
+  # can be added to the VulnerabilityReport. Supported parameters: Description, Links, CVSS, Target, Class, PackagePath, PackageType, SeveritySource, and DataSource
   additionalVulnerabilityReportFields: ""
 
   # -- httpProxy is the HTTP proxy used by Trivy to download the vulnerabilities database from GitHub.
@@ -472,11 +473,11 @@ trivy:
   resources:
     requests:
       cpu: 100m
-      memory: 100M
+      memory: 100Mi
       # ephemeralStorage: "2Gi"
     limits:
       cpu: 500m
-      memory: 500M
+      memory: 500Mi
       # ephemeralStorage: "2Gi"
 
   # -- githubToken is the GitHub access token used by Trivy to download the vulnerabilities
@@ -566,6 +567,7 @@ trivy:
   serverPassword: ""
   # -- serverServiceName this param is the server service name to be used in cluster
   serverServiceName: "trivy-service"
+  containerdNamespace: "k8s.io"
   # -- debug One of `true` or `false`. Enables debug mode.
   debug: false
 

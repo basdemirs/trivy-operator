@@ -1415,10 +1415,26 @@ spec:
                             type: number
                           V3Vector:
                             type: string
+                          V40Score:
+                            type: number
+                          V40Vector:
+                            type: string
                         type: object
                       type: object
                     cvsssource:
                       type: string
+                    dataSource:
+                      description: DataSource represents the source of vulnerability
+                        data.
+                      properties:
+                        id:
+                          description: SourceID represents data source such as NVD.
+                          type: string
+                        name:
+                          type: string
+                        url:
+                          type: string
+                      type: object
                     description:
                       type: string
                     fixedVersion:
@@ -1461,6 +1477,9 @@ spec:
                       - MEDIUM
                       - LOW
                       - UNKNOWN
+                      type: string
+                    severitySource:
+                      description: SourceID represents data source such as NVD.
                       type: string
                     target:
                       type: string
@@ -2849,10 +2868,26 @@ spec:
                             type: number
                           V3Vector:
                             type: string
+                          V40Score:
+                            type: number
+                          V40Vector:
+                            type: string
                         type: object
                       type: object
                     cvsssource:
                       type: string
+                    dataSource:
+                      description: DataSource represents the source of vulnerability
+                        data.
+                      properties:
+                        id:
+                          description: SourceID represents data source such as NVD.
+                          type: string
+                        name:
+                          type: string
+                        url:
+                          type: string
+                      type: object
                     description:
                       type: string
                     fixedVersion:
@@ -2895,6 +2930,9 @@ spec:
                       - MEDIUM
                       - LOW
                       - UNKNOWN
+                      type: string
+                    severitySource:
+                      description: SourceID represents data source such as NVD.
                       type: string
                     target:
                       type: string
@@ -2985,6 +3023,7 @@ data:
   OPERATOR_CONCURRENT_SCAN_JOBS_LIMIT: "10"
   OPERATOR_CONCURRENT_NODE_COLLECTOR_LIMIT: "1"
   OPERATOR_SCAN_JOB_RETRY_AFTER: "30s"
+  OPERATOR_SCAN_JOB_DELAY_REQUEUE: "60s"
   OPERATOR_BATCH_DELETE_LIMIT: "10"
   OPERATOR_BATCH_DELETE_DELAY: "10s"
   OPERATOR_METRICS_BIND_ADDRESS: ":8080"
@@ -2997,6 +3036,7 @@ data:
   OPERATOR_VULNERABILITY_SCANNER_SCAN_ONLY_CURRENT_REVISIONS: "true"
   OPERATOR_SCANNER_REPORT_TTL: "24h"
   OPERATOR_CACHE_REPORT_TTL: "120h"
+  OPERATOR_SCANNER_SECRET_TTL: ""
   CONTROLLER_CACHE_SYNC_TIMEOUT: "5m"
   OPERATOR_CONFIG_AUDIT_SCANNER_ENABLED: "true"
   OPERATOR_RBAC_ASSESSMENT_SCANNER_ENABLED: "true"
@@ -3033,7 +3073,7 @@ metadata:
     app.kubernetes.io/managed-by: kubectl
 data:
   trivy.repository: "ghcr.io/aquasecurity/trivy"
-  trivy.tag: "0.53.0"
+  trivy.tag: "0.54.1"
   trivy.imagePullPolicy: "IfNotPresent"
   trivy.additionalVulnerabilityReportFields: ""
   trivy.severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
@@ -3041,6 +3081,7 @@ data:
   trivy.skipJavaDBUpdate: "false"
   trivy.includeDevDeps: "false"
   trivy.imageScanCacheDir: "/tmp/trivy/.cache"
+  trivy.containerdNamespace: "k8s.io"
   trivy.filesystemScanCacheDir: "/var/trivyoperator/trivy-db"
   trivy.dbRepository: "ghcr.io/aquasecurity/trivy-db"
   trivy.javaDbRepository: "ghcr.io/aquasecurity/trivy-java-db"
@@ -3053,9 +3094,9 @@ data:
   trivy.timeout: "5m0s"
   trivy.mode: "Standalone"
   trivy.resources.requests.cpu: "100m"
-  trivy.resources.requests.memory: "100M"
+  trivy.resources.requests.memory: "100Mi"
   trivy.resources.limits.cpu: "500m"
-  trivy.resources.limits.memory: "500M"
+  trivy.resources.limits.memory: "500Mi"
 ---
 # Source: trivy-operator/templates/secrets/operator.yaml
 apiVersion: v1

@@ -11,6 +11,7 @@ data:
   OPERATOR_CONCURRENT_SCAN_JOBS_LIMIT: {{ .Values.operator.scanJobsConcurrentLimit | quote }}
   OPERATOR_CONCURRENT_NODE_COLLECTOR_LIMIT: {{ .Values.operator.scanNodeCollectorLimit | quote }}
   OPERATOR_SCAN_JOB_RETRY_AFTER: {{ .Values.operator.scanJobsRetryDelay | quote }}
+  OPERATOR_SCAN_JOB_DELAY_REQUEUE: {{ .Values.operator.scanJobsDelayRequeue | quote }}
   OPERATOR_BATCH_DELETE_LIMIT: {{ .Values.operator.batchDeleteLimit | quote }}
   OPERATOR_BATCH_DELETE_DELAY: {{ .Values.operator.batchDeleteDelay | quote }}
   OPERATOR_METRICS_BIND_ADDRESS: ":8080"
@@ -23,6 +24,7 @@ data:
   OPERATOR_VULNERABILITY_SCANNER_SCAN_ONLY_CURRENT_REVISIONS: {{ .Values.operator.vulnerabilityScannerScanOnlyCurrentRevisions | quote }}
   OPERATOR_SCANNER_REPORT_TTL: {{ .Values.operator.scannerReportTTL | quote }}
   OPERATOR_CACHE_REPORT_TTL: {{ .Values.operator.cacheReportTTL | quote }}
+  OPERATOR_SCANNER_SECRET_TTL: {{ .Values.operator.scanSecretTTL | quote }}
   CONTROLLER_CACHE_SYNC_TIMEOUT: {{ .Values.operator.controllerCacheSyncTimeout | quote }}
   OPERATOR_CONFIG_AUDIT_SCANNER_ENABLED: {{ .Values.operator.configAuditScannerEnabled | quote }}
   OPERATOR_RBAC_ASSESSMENT_SCANNER_ENABLED: {{ .Values.operator.rbacAssessmentScannerEnabled | quote }}

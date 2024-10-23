@@ -29,7 +29,6 @@ import (
 	"github.com/stretchr/testify/require"
 	appsv1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/batch/v1"
-	"k8s.io/api/batch/v1beta1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -99,9 +98,9 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &appsv1.ReplicaSet{
 				TypeMeta: metav1.TypeMeta{
@@ -203,11 +202,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -350,11 +349,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -389,9 +388,9 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 				"trivy.javaDbRepository":             trivy.DefaultJavaDBRepository,
 
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -487,11 +486,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -638,11 +637,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -676,9 +675,9 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 				"trivy.dbRepository":               trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":           trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":     "100m",
-				"trivy.resources.requests.memory":  "100M",
+				"trivy.resources.requests.memory":  "100Mi",
 				"trivy.resources.limits.cpu":       "500m",
-				"trivy.resources.limits.memory":    "500M",
+				"trivy.resources.limits.memory":    "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -775,11 +774,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -926,11 +925,11 @@ func TestPlugin_GetScanJobSpec(t *testing.T) {
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -968,9 +967,9 @@ CVE-2019-1543`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -1083,11 +1082,11 @@ CVE-2019-1543`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1234,11 +1233,11 @@ CVE-2019-1543`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1281,9 +1280,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -1396,11 +1395,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1547,11 +1546,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1590,9 +1589,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 
 				"trivy.registry.mirror.index.docker.io": "mirror.io",
 			},
@@ -1692,11 +1691,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1839,11 +1838,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -1876,9 +1875,9 @@ default ignore = false`,
 				"trivy.dbRepository":              "custom-registry.com/mirror/trivy-db",
 				"trivy.javaDbRepository":          "custom-registry.com/mirror/trivy-java-db",
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &appsv1.ReplicaSet{
 				TypeMeta: metav1.TypeMeta{
@@ -1980,11 +1979,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -2127,11 +2126,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -2165,9 +2164,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -2359,11 +2358,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount()},
@@ -2394,9 +2393,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -2588,11 +2587,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount()},
@@ -2624,9 +2623,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -2822,11 +2821,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount()},
@@ -2858,9 +2857,9 @@ default ignore = false`,
 				"trivy.dbRepository":               trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":           trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":     "100m",
-				"trivy.resources.requests.memory":  "100M",
+				"trivy.resources.requests.memory":  "100Mi",
 				"trivy.resources.limits.cpu":       "500m",
-				"trivy.resources.limits.memory":    "500M",
+				"trivy.resources.limits.memory":    "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -3056,11 +3055,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount()},
@@ -3096,9 +3095,9 @@ CVE-2019-1543`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -3310,11 +3309,11 @@ CVE-2019-1543`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount(),
@@ -3356,9 +3355,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -3570,11 +3569,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount(),
@@ -3611,9 +3610,9 @@ default ignore = false`,
 				"trivy.dbRepository":              "custom-registry.com/mirror/trivy-db",
 				"trivy.javaDbRepository":          "custom-registry.com/mirror/trivy-java-db",
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -3805,11 +3804,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{getTmpVolumeMount(), getScanResultVolumeMount()},
@@ -3840,9 +3839,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 				"trivy.timeout":                   "5m0s",
 			},
 			workloadSpec: &corev1.Pod{
@@ -3903,11 +3902,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4000,11 +3999,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4152,11 +4151,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4202,9 +4201,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 				"trivy.timeout":                   "5m0s",
 			},
 			workloadSpec: &corev1.Pod{
@@ -4265,11 +4264,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4455,11 +4454,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4504,9 +4503,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 				"trivy.timeout":                   "5m0s",
 			},
 			workloadSpec: &corev1.Pod{
@@ -4567,11 +4566,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4664,11 +4663,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4816,11 +4815,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -4866,9 +4865,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 				"trivy.timeout":                   "5m0s",
 			},
 			workloadSpec: &corev1.Pod{
@@ -4929,11 +4928,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5119,11 +5118,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5168,9 +5167,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 
 				"trivy.registry.mirror.000000000000.dkr.ecr.us-east-1.amazonaws.com": "000000000000.dkr.ecr.eu-west-1.amazonaws.com",
 			},
@@ -5270,11 +5269,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5421,11 +5420,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5459,9 +5458,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 			},
 			workloadSpec: &corev1.Pod{
 				TypeMeta: metav1.TypeMeta{
@@ -5567,11 +5566,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5736,11 +5735,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -5774,9 +5773,9 @@ default ignore = false`,
 				"trivy.dbRepository":              trivy.DefaultDBRepository,
 				"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 				"trivy.resources.requests.cpu":    "100m",
-				"trivy.resources.requests.memory": "100M",
+				"trivy.resources.requests.memory": "100Mi",
 				"trivy.resources.limits.cpu":      "500m",
-				"trivy.resources.limits.memory":   "500M",
+				"trivy.resources.limits.memory":   "500Mi",
 
 				"trivy.registry.mirror.index.docker.io": "mirror.io",
 			},
@@ -5884,11 +5883,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -6053,11 +6052,11 @@ default ignore = false`,
 						Resources: corev1.ResourceRequirements{
 							Requests: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("100m"),
-								corev1.ResourceMemory: resource.MustParse("100M"),
+								corev1.ResourceMemory: resource.MustParse("100Mi"),
 							},
 							Limits: corev1.ResourceList{
 								corev1.ResourceCPU:    resource.MustParse("500m"),
-								corev1.ResourceMemory: resource.MustParse("500M"),
+								corev1.ResourceMemory: resource.MustParse("500Mi"),
 							},
 						},
 						VolumeMounts: []corev1.VolumeMount{
@@ -6139,9 +6138,9 @@ default ignore = false`,
 			"trivy.dbRepository":              trivy.DefaultDBRepository,
 			"trivy.javaDbRepository":          trivy.DefaultJavaDBRepository,
 			"trivy.resources.requests.cpu":    "100m",
-			"trivy.resources.requests.memory": "100M",
+			"trivy.resources.requests.memory": "100Mi",
 			"trivy.resources.limits.cpu":      "500m",
-			"trivy.resources.limits.memory":   "500M",
+			"trivy.resources.limits.memory":   "500Mi",
 			"trivy.timeout":                   "5m0s",
 		},
 		workloadSpec: &corev1.Pod{
@@ -6203,11 +6202,11 @@ default ignore = false`,
 					Resources: corev1.ResourceRequirements{
 						Requests: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("100m"),
-							corev1.ResourceMemory: resource.MustParse("100M"),
+							corev1.ResourceMemory: resource.MustParse("100Mi"),
 						},
 						Limits: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("500m"),
-							corev1.ResourceMemory: resource.MustParse("500M"),
+							corev1.ResourceMemory: resource.MustParse("500Mi"),
 						},
 					},
 					VolumeMounts: []corev1.VolumeMount{
@@ -6300,11 +6299,11 @@ default ignore = false`,
 					Resources: corev1.ResourceRequirements{
 						Requests: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("100m"),
-							corev1.ResourceMemory: resource.MustParse("100M"),
+							corev1.ResourceMemory: resource.MustParse("100Mi"),
 						},
 						Limits: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("500m"),
-							corev1.ResourceMemory: resource.MustParse("500M"),
+							corev1.ResourceMemory: resource.MustParse("500Mi"),
 						},
 					},
 					VolumeMounts: []corev1.VolumeMount{
@@ -6453,11 +6452,11 @@ default ignore = false`,
 					Resources: corev1.ResourceRequirements{
 						Requests: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("100m"),
-							corev1.ResourceMemory: resource.MustParse("100M"),
+							corev1.ResourceMemory: resource.MustParse("100Mi"),
 						},
 						Limits: corev1.ResourceList{
 							corev1.ResourceCPU:    resource.MustParse("500m"),
-							corev1.ResourceMemory: resource.MustParse("500M"),
+							corev1.ResourceMemory: resource.MustParse("500Mi"),
 						},
 					},
 					VolumeMounts: []corev1.VolumeMount{
@@ -6497,7 +6496,7 @@ default ignore = false`,
 						Namespace: "trivyoperator-ns",
 					},
 					Data: tc.config,
-				}, &v1beta1.CronJob{}).Build()
+				}, &v1.CronJob{}).Build()
 			pluginContext := trivyoperator.NewPluginContext().
 				WithName(trivy.Plugin).
 				WithNamespace("trivyoperator-ns").
@@ -6797,9 +6796,12 @@ func TestPlugin_ParseReportData(t *testing.T) {
 
 func TestGetScoreFromCVSS(t *testing.T) {
 	testCases := []struct {
-		name          string
-		cvss          dbtypes.VendorCVSS
-		expectedScore *float64
+		name             string
+		cvss             dbtypes.VendorCVSS
+		severitySource   string
+		preferredSources []string
+		expectedScore    *float64
+		expectedSource   string
 	}{
 		{
 			name: "Should return nvd score when nvd and vendor v3 score exist",
@@ -6811,7 +6813,10 @@ func TestGetScoreFromCVSS(t *testing.T) {
 					V3Score: 8.3,
 				},
 			},
-			expectedScore: ptr.To[float64](8.1),
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat"},
+			expectedScore:    ptr.To[float64](8.1),
+			expectedSource:   "nvd",
 		},
 		{
 			name: "Should return nvd score when vendor v3 score is nil",
@@ -6823,7 +6828,10 @@ func TestGetScoreFromCVSS(t *testing.T) {
 					V3Score: 0.0,
 				},
 			},
-			expectedScore: ptr.To[float64](8.1),
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat"},
+			expectedScore:    ptr.To[float64](8.1),
+			expectedSource:   "nvd",
 		},
 		{
 			name: "Should return nvd score when vendor doesn't exist",
@@ -6832,7 +6840,10 @@ func TestGetScoreFromCVSS(t *testing.T) {
 					V3Score: 8.1,
 				},
 			},
-			expectedScore: ptr.To[float64](8.1),
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat"},
+			expectedScore:    ptr.To[float64](8.1),
+			expectedSource:   "nvd",
 		},
 		{
 			name: "Should return vendor score when nvd doesn't exist",
@@ -6841,10 +6852,13 @@ func TestGetScoreFromCVSS(t *testing.T) {
 					V3Score: 8.1,
 				},
 			},
-			expectedScore: ptr.To[float64](8.1),
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat"},
+			expectedScore:    ptr.To[float64](8.1),
+			expectedSource:   "redhat",
 		},
 		{
-			name: "Should return nil when vendor and nvd both v3 scores are nil",
+			name: "Should return 3.7 and debian source when vendor and nvd v3 scores are nil based on ordered preference",
 			cvss: dbtypes.VendorCVSS{
 				"nvd": {
 					V3Score: 0.0,
@@ -6852,20 +6866,33 @@ func TestGetScoreFromCVSS(t *testing.T) {
 				"redhat": {
 					V3Score: 0.0,
 				},
+				"debian": {
+					V3Score: 3.7,
+				},
+				"ubuntu": {
+					V3Score: 3.8,
+				},
 			},
-			expectedScore: nil,
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat", "debian", "ubuntu"},
+			expectedScore:    ptr.To[float64](3.7),
+			expectedSource:   "debian",
 		},
 		{
-			name:          "Should return nil when cvss doesn't exist",
-			cvss:          dbtypes.VendorCVSS{},
-			expectedScore: nil,
+			name:             "Should return nil when cvss doesn't exist",
+			cvss:             dbtypes.VendorCVSS{},
+			severitySource:   "",
+			preferredSources: []string{"nvd", "redhat"},
+			expectedScore:    nil,
+			expectedSource:   "",
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			score := vulnerabilityreport.GetScoreFromCVSS(vulnerabilityreport.GetCvssV3(tc.cvss))
+			score, source := vulnerabilityreport.GetScoreFromCVSS(vulnerabilityreport.GetCvssV3(tc.cvss), tc.severitySource, tc.preferredSources)
 			assert.Equal(t, tc.expectedScore, score)
+			assert.Equal(t, tc.expectedSource, source)
 		})
 	}
 }

@@ -64,6 +64,7 @@ const (
 	keyTrivySkipJavaDBUpdate       = "trivy.skipJavaDBUpdate"
 	keyTrivyImageScanCacheDir      = "trivy.imageScanCacheDir"
 	keyTrivyFilesystemScanCacheDir = "trivy.filesystemScanCacheDir"
+	KeyTrivyContainerdNamespace    = "trivy.containerdNamespace"
 	// nolint:gosec // This is not a secret, but a configuration value.
 	keyTrivyServerTokenHeader = "trivy.serverTokenHeader"
 	keyTrivyServerInsecure    = "trivy.serverInsecure"
@@ -107,6 +108,10 @@ func (c Config) GetAdditionalVulnerabilityReportFields() vulnerabilityreport.Add
 			addFields.PackageType = true
 		case "PackagePath":
 			addFields.PkgPath = true
+		case "SeveritySource":
+			addFields.SeveritySource = true
+		case "DataSource":
+			addFields.DataSource = true
 		}
 	}
 	return addFields
@@ -243,6 +248,14 @@ func (c Config) GetImageScanCacheDir() string {
 	val, ok := c.Data[keyTrivyImageScanCacheDir]
 	if !ok || val == "" {
 		return "/tmp/trivy/.cache"
+	}
+	return val
+}
+
+func (c Config) GetContainerdNamespace() string {
+	val, ok := c.Data[KeyTrivyContainerdNamespace]
+	if !ok || val == "" {
+		return "default"
 	}
 	return val
 }
@@ -533,6 +546,47 @@ func (c Config) setResourceLimit(configKey string, k8sResourceList *corev1.Resou
 		quantity, err := resource.ParseQuantity(value)
 		if err != nil {
 			return fmt.Errorf("parsing resource definition %s: %s %w", configKey, value, err)
+		}
+
+		// Ensure memory and ephemeral storage is set in valid units and the value is positive
+		if k8sResourceName == corev1.ResourceMemory || k8sResourceName == corev1.ResourceEphemeralStorage {
+			allowedUnits := []string{"Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "K", "M", "G", "T", "P", "E"}
+			valid := false
+			for _, unit := range allowedUnits {
+				if strings.HasSuffix(value, unit) {
+					valid = true
+					break
+				}
+			}
+			if !valid {
+				return fmt.Errorf("invalid value %s for key %s, should be specified in units like Ki, Mi, Gi, etc", value, configKey)
+			}
+			if quantity.Value() < 0 {
+				return fmt.Errorf("%s value %s must be a positive number", configKey, value)
+			}
+		}
+
+		// Ensure CPU values are correctly parsed, and that the value is positive
+		if k8sResourceName == corev1.ResourceCPU {
+			cpuValue := quantity.MilliValue()
+			if cpuValue < 0 {
+				return fmt.Errorf("CPU value %s must be a positive number", value)
+			}
+			// Ensure CPU value is either in millicores or cores
+			valueStr := quantity.String()
+			if !(strings.HasSuffix(valueStr, "m") || !strings.Contains(valueStr, "m")) {
+				return fmt.Errorf("CPU value %s is not in a valid format", valueStr)
+			}
+		}
+
+		// Ensure the parsed quantity matches the original value
+		originalQuantity, err := resource.ParseQuantity(value)
+		if err != nil {
+			return fmt.Errorf("parsing original resource definition %s: %s %w", configKey, value, err)
+		}
+
+		if quantity.Cmp(originalQuantity) != 0 {
+			return fmt.Errorf("parsed value %s does not match the original value %s for key %s", quantity.String(), value, configKey)
 		}
 
 		(*k8sResourceList)[k8sResourceName] = quantity

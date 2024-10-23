@@ -5,6 +5,7 @@ import (
 
 	"context"
 	"fmt"
+
 	trivy_checks "github.com/aquasecurity/trivy-checks"
 	j "github.com/aquasecurity/trivy-kubernetes/pkg/jobs"
 	"github.com/aquasecurity/trivy-kubernetes/pkg/k8s"
@@ -12,7 +13,6 @@ import (
 	"github.com/aquasecurity/trivy-operator/pkg/infraassessment"
 	"github.com/aquasecurity/trivy-operator/pkg/operator/jobs"
 	"github.com/aquasecurity/trivy-operator/pkg/operator/predicate"
-	. "github.com/aquasecurity/trivy-operator/pkg/operator/predicate"
 	"github.com/aquasecurity/trivy-operator/pkg/plugins/trivy"
 	"github.com/aquasecurity/trivy-operator/pkg/policy"
 	"github.com/aquasecurity/trivy-operator/pkg/trivyoperator"
@@ -59,10 +59,12 @@ func (r *NodeReconciler) SetupWithManager(mgr ctrl.Manager) error {
 		return err
 	}
 
-	return ctrl.NewControllerManagedBy(mgr).WithOptions(controller.Options{
-		CacheSyncTimeout: r.CacheSyncTimeout,
-	}).
-		For(&corev1.Node{}, builder.WithPredicates(IsLinuxNode, predicate.Not((excludeNodePredicate)))).
+	return ctrl.NewControllerManagedBy(mgr).
+		Named("node-reconciler").
+		WithOptions(controller.Options{
+			CacheSyncTimeout: r.CacheSyncTimeout,
+		}).
+		For(&corev1.Node{}, builder.WithPredicates(predicate.IsLinuxNode, predicate.Not((excludeNodePredicate)))).
 		Owns(&v1alpha1.ClusterInfraAssessmentReport{}).
 		Complete(r.reconcileNodes())
 }
@@ -112,8 +114,8 @@ func (r *NodeReconciler) reconcileNodes() reconcile.Func {
 		log.V(1).Info("Checking node collector jobs limit", "count", jobsCount, "limit", r.ConcurrentScanJobsLimit)
 
 		if limitExceeded {
-			log.V(1).Info("Pushing back node collector job", "count", jobsCount, "retryAfter", r.ScanJobRetryAfter)
-			return ctrl.Result{RequeueAfter: r.Config.ScanJobRetryAfter}, nil
+			log.V(1).Info("Pushing back node collector job", "count", jobsCount, "retryAfter", r.ScanJobDelayRequeue)
+			return ctrl.Result{RequeueAfter: r.Config.ScanJobDelayRequeue}, nil
 		}
 		cluster, err := k8s.GetCluster()
 		if err != nil {
@@ -159,7 +161,7 @@ func (r *NodeReconciler) reconcileNodes() reconcile.Func {
 
 		requirements, err := tc.GetResourceRequirements()
 		if err != nil {
-			return ctrl.Result{}, fmt.Errorf("getting node-collector resource requierments: %w", err)
+			return ctrl.Result{}, fmt.Errorf("getting node-collector resource requirements: %w", err)
 		}
 
 		scanJobPodPriorityClassName, err := r.GetScanJobPodPriorityClassName()

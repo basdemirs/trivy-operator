@@ -240,8 +240,14 @@ func CreateSbomDataAsSecret(bom v1alpha1.BOM, secretName string) (corev1.Secret,
 }
 
 // CreateVolumeSbomFiles creates a volume and volume mount for the sbom data
-func CreateVolumeSbomFiles(volumeMounts *[]corev1.VolumeMount, volumes *[]corev1.Volume, secretName *string, fileName string, mountPath string, cname string) {
-	vname := fmt.Sprintf("sbomvol-%s", cname)
+func CreateVolumeSbomFiles(secretName string, fileName string, mountPath string, cname string) (corev1.Volume, corev1.VolumeMount) {
+	vnamePrefix := "sbomvol-"
+	// Truncate cname to ensure that vname fits within 63 characters including the prefix
+	maxCnameLength := 62 - len(vnamePrefix)
+	if len(cname) > maxCnameLength {
+		cname = cname[:maxCnameLength]
+	}
+	vname := fmt.Sprintf("%s%s", vnamePrefix, cname)
 	sbomMount := corev1.VolumeMount{
 		Name:      vname,
 		MountPath: mountPath,
@@ -251,7 +257,7 @@ func CreateVolumeSbomFiles(volumeMounts *[]corev1.VolumeMount, volumes *[]corev1
 		Name: vname,
 		VolumeSource: corev1.VolumeSource{
 			Secret: &corev1.SecretVolumeSource{
-				SecretName: *secretName,
+				SecretName: secretName,
 				Items: []corev1.KeyToPath{
 					{
 						Key:  "bom",
@@ -261,6 +267,5 @@ func CreateVolumeSbomFiles(volumeMounts *[]corev1.VolumeMount, volumes *[]corev1
 			},
 		},
 	}
-	*volumes = append(*volumes, sbomVolume)
-	*volumeMounts = append(*volumeMounts, sbomMount)
+	return sbomVolume, sbomMount
 }
